@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ScrumsView: View {
+    
     @Binding var scrums: [DailyScrum]
+    
     var body: some View {
         List {
             ForEach($scrums) { $scrum in
@@ -21,12 +23,14 @@ struct ScrumsView: View {
         }
         .navigationTitle("Daily Scrums")
         .toolbar {
-            Button {
-                
-            } label: {
-                Image(systemName: "plus")
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    
+                } label: {
+                    Image(systemName: "plus")
+                }
+                .accessibilityLabel("New Scrum")
             }
-            .accessibilityLabel("New Scrum")
         }
     }
 }

@@ -45,6 +45,5 @@ enum Theme: String, CaseIterable, Identifiable {
     var id: String {
         name
     }
-    
 }
 

@@ -59,12 +59,18 @@ struct DetailView: View {
         }
         .navigationTitle(scrum.title)
         .toolbar{
-            Button("Edit") {
-                isPresentingEditView = true
-                data = scrum.data
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Edit") {
+                    isPresentingEditView = true
+                    data = scrum.data
+                }
             }
         }
         .sheet(isPresented: $isPresentingEditView) {
+            
+            // Sheet view is a new view that doesn't have Navigation View
+            // You have to embed in Navigation View in order to access tool bar items
+            
             NavigationView {
                 DetailEditView(data: $data)
                     .navigationTitle(scrum.title)
@@ -79,6 +85,7 @@ struct DetailView: View {
                             Button("Done") {
                                 isPresentingEditView = false
                                 scrum.update(from: data)
+                                // You are updating an binding variable, so whenever you change this property it'll update entire view that uses binding variable
                             }
                         }
                     }

@@ -16,9 +16,9 @@ struct ThemePickerView: View {
             ForEach(Theme.allCases) { theme in
                 ThemeView(theme: theme)
                     .tag(theme)
-                // You have to put theme inside the tag
-                // I'm not sure but you have to do it
-                // Maybe you can ask in stackoverflow
+                // You have to put "theme" inside the tag
+                // I'm not sure why but you have to do it
+                // Maybe you can ask on stackoverflow
             }
         }
     }
