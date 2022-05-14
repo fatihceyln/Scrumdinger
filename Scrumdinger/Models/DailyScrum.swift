@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct DailyScrum: Identifiable {
+struct DailyScrum: Identifiable, Codable {
     let id: UUID
     var title: String
     var attendees: [Attendee]
     var lengthInMinutes: Int
     var theme: Theme
+    var history: [History] = []
     
     init(id: UUID = UUID(), title: String, attendess: [String], lengthInMinutes: Int, theme: Theme) {
         self.id = id
@@ -25,11 +26,9 @@ struct DailyScrum: Identifiable {
     }
 }
 
-// Attende struct
-// Data struct
-// data variable
 extension DailyScrum {
-    struct Attendee: Identifiable {
+    
+    struct Attendee: Identifiable, Codable {
         let id: UUID
         var name: String
         
@@ -39,9 +38,9 @@ extension DailyScrum {
         }
     }
     
+    // Data struct and DailyScrum struct have same variables because we want to pass Data type variable to change some properties that related with existed DailyScrum type variable
     struct Data {
         // if all properties have default value, the compiler creates an initializer that takes no arguments. With this initializer, you can create a new instance by calling Data()
-        
         var title: String = ""
         var attendees: [Attendee] = []
         var lengthInMinutes: Double = 5
@@ -52,11 +51,21 @@ extension DailyScrum {
         Data(title: title, attendees: attendees, lengthInMinutes: Double(lengthInMinutes), theme: theme)
     }
     
+    // if you want to change some variable inside this struct you have to make your function 'mutating func' thus you can change variables
     mutating func update(from data: Data) {
         title = data.title
         attendees = data.attendees
         lengthInMinutes = Int(data.lengthInMinutes)
         theme = data.theme
+    }
+    
+    // we're writing another init to take 'Data' as a parameter and change some properties. if we don't do that we can't get Data as a parameter thus we can't change properties. Because our pre defined init doesn't accept Data type.
+    init(data: Data, id: UUID = UUID()) {
+        self.title = data.title
+        self.attendees = data.attendees
+        self.lengthInMinutes = Int(data.lengthInMinutes)
+        self.theme = data.theme
+        self.id = id
     }
 }
 
