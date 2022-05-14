@@ -22,10 +22,6 @@ struct MeetingHeaderView: View {
         return Double(secondsElapsed) / Double(totalSeconds)
     }
     
-    private var minutesRemaining: Int {
-        secondsRemaining / 60
-    }
-    
     
     var body: some View {
         VStack {
@@ -50,10 +46,6 @@ struct MeetingHeaderView: View {
                 }
             }
         }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Time remaining")
-        .accessibilityValue("10 minutes")
-        .accessibilityValue("\(minutesRemaining) minutes")
         .padding([.top, .horizontal])
     }
 }

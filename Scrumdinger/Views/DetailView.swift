@@ -30,7 +30,6 @@ struct DetailView: View {
                     
                     Text("\(scrum.lengthInMinutes) minutes")
                 }
-                .accessibilityElement(children: .combine)
                 
                 HStack {
                     Label("Theme", systemImage: "paintpalette")

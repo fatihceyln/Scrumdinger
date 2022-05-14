@@ -24,7 +24,6 @@ struct ScrumsView: View {
                     CardView(scrum: scrum)
                 }
                 .listRowBackground(scrum.theme.mainColor)
-                .listRowSeparatorTint(.pink)
                 .foregroundColor(scrum.theme.accentColor)
             }
             .onDelete { indices in
@@ -39,7 +38,6 @@ struct ScrumsView: View {
                 } label: {
                     Image(systemName: "plus")
                 }
-                .accessibilityLabel("New Scrum")
             }
         }
         .sheet(isPresented: $isPresentingNewScrumView) {
@@ -49,7 +47,7 @@ struct ScrumsView: View {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Dismiss") {
                                 isPresentingNewScrumView = false
-                                newScrumData = DailyScrum.Data()
+                                newScrumData = DailyScrum.Data() // to set default
                             }
                         }
                         
@@ -58,7 +56,7 @@ struct ScrumsView: View {
                                 let newScrum = DailyScrum(data: newScrumData)
                                 scrums.append(newScrum)
                                 isPresentingNewScrumView = false
-                                newScrumData = DailyScrum.Data()
+                                newScrumData = DailyScrum.Data() // to set default
                             }
                         }
                     }

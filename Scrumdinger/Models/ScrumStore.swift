@@ -50,9 +50,9 @@ class ScrumStore: ObservableObject {
                 // encoding [DailyScrum]
                 let data = try JSONEncoder().encode(scrums)
                 // getting file url
-                let url = try fileURL()
+                let fileURL = try fileURL()
                 // writing data to given url
-                try data.write(to: url)
+                try data.write(to: fileURL)
                 
                 // when you use @escaping closure you have to send data via DispatchQueu.main.async because you're updating UI
                 DispatchQueue.main.async {

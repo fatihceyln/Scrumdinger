@@ -8,6 +8,7 @@
 import Foundation
 
 class ScrumTimer: ObservableObject {
+    
     struct Speaker: Identifiable {
         let name: String
         var isCompleted: Bool
@@ -17,6 +18,7 @@ class ScrumTimer: ObservableObject {
     @Published var activeSpeaker = ""
     @Published var secondsElapsed = 0
     @Published var secondsRemaining = 0
+    
     // private(set) means it can change only within this class
     private(set) var speakers: [Speaker] = []
     private(set) var lengthInMinutes: Int
