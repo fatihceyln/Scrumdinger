@@ -19,6 +19,21 @@ class ScrumStore: ObservableObject {
             .appendingPathComponent("scrums.data")
     }
     
+    static func load() async throws -> [DailyScrum] {
+        try await withCheckedThrowingContinuation({ continuation in
+            load { result in
+                switch result {
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                case .success(let scrums):
+                    continuation.resume(returning: scrums)
+                }
+                
+                //continuation.resume(with: result)
+            }
+        })
+    }
+    
     static func load(completion: @escaping (Result<[DailyScrum] ,Error>) -> ()) {
         DispatchQueue.global(qos: .background).async {
             do {
@@ -42,6 +57,21 @@ class ScrumStore: ObservableObject {
                 completion(.failure(error))
             }
         }
+    }
+    
+    // The save function returns a value that callers of the function may not use. The '@discardableResult' attribute disables warnings about the unused return value
+    @discardableResult
+    static func save(scrums: [DailyScrum]) async throws -> Int {
+        try await withCheckedThrowingContinuation({ continuation in
+            save(scrums: scrums) { result in
+                switch result {
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                case .success(let scrumsSaved):
+                    continuation.resume(returning: scrumsSaved)
+                }
+            }
+        })
     }
 
     static func save(scrums: [DailyScrum], completion: @escaping(Result<Int, Error>) -> ()) {
