@@ -63,11 +63,5 @@ struct ScrumdingerApp: App {
             }
 
         }
-        
-        /*
-        WindowGroup {
-            TestView()
-        }
-        */
     }
 }
